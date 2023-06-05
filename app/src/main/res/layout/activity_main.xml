@@ -18,6 +18,8 @@
         android:layout_above="@+id/result_tv"
         android:layout_margin="16sp" />
 
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +46,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
-            
+
             <com.google.android.material.button.MaterialButton
                 android:layout_width="72sp"
                 android:layout_height="72sp"
@@ -325,6 +327,7 @@
                 />
 
         </LinearLayout>
+
 
 
 
