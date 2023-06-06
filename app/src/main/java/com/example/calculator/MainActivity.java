@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     MaterialButton button0, button1, button2, button3, button4, button5, button6, button7, button8, button9;
     MaterialButton buttonAC, buttonDot;
 
-    ArrayList<String> messageHistory = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         assignId(buttonAC, R.id.button_ac);
         assignId(buttonDot, R.id.button_dot);
 
-        updateMessageHistory();
+
     }
 
     void assignId(MaterialButton btn, int id) {
@@ -85,13 +85,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             resultTv.setText(finalResult);
         }
 
-        messageHistory.add(dataToCalculate);
 
-        if (messageHistory.size() > 10) {
-            messageHistory.remove(0);
-        }
 
-        updateMessageHistory();
     }
 
     String getResult(String data) {
@@ -109,11 +104,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void updateMessageHistory() {
-        StringBuilder historyText = new StringBuilder();
-        for (String message : messageHistory) {
-            historyText.append(message).append("\n");
-        }
-        solutionTv.setText(historyText.toString());
-    }
+
 }
