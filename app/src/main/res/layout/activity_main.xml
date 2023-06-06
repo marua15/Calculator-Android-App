@@ -8,28 +8,46 @@
 
 
     <TextView
+        android:id="@+id/solution_tv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/solution_tv"
-        android:text="0"
-        android:textSize="32sp"
-        android:textAlignment="textEnd"
-        android:textColor="@color/black"
         android:layout_above="@+id/result_tv"
-        android:layout_margin="16sp" />
+        android:layout_marginStart="16sp"
+        android:layout_marginTop="16sp"
+        android:layout_marginEnd="16sp"
+        android:layout_marginBottom="16sp"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="32sp" />
 
 
+    <Button
+        android:id="@+id/button_history"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="55dp"
+        android:layout_height="64dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+
+        android:text="H"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:cornerRadius="4sp" />
 
     <TextView
+        android:id="@+id/result_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/result_tv"
-        android:text="0"
-        android:textSize="64sp"
+        android:layout_above="@+id/buttons_layout"
+        android:layout_marginStart="16sp"
+        android:layout_marginTop="16sp"
+        android:layout_marginEnd="16sp"
+        android:layout_marginBottom="16sp"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
-        android:layout_above="@+id/buttons_layout"
-        android:layout_margin="16sp" />
+        android:textSize="64sp" />
 
 
     <LinearLayout
