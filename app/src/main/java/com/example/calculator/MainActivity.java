@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     static ArrayList<String> historyList;
     ArrayAdapter<String> adapter;
+    private MyDatabaseHelper databaseHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         solutionTv = findViewById(R.id.solution_tv);
 
         historyList = new ArrayList<>();
+        databaseHelper = new MyDatabaseHelper(this);
+
 
         assignId(buttonC, R.id.button_c);
         assignId(buttonBrackOpen, R.id.button_open_bracket);
@@ -60,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
-                intent.putStringArrayListExtra("historyList", historyList);
+                // intent.putStringArrayListExtra("historyList", historyList);
                 startActivity(intent);
             }
         });
@@ -89,6 +93,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //String operation = dataToCalculate;
             String result = resultTv.getText().toString();
             historyList.add(operation + " = " + result);
+            String equation = operation + " = " + result;
+            databaseHelper.insertEquation(equation);
+
 
             if (historyList.size() > 10) {
                 historyList.remove(0);
