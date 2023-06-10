@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.google.android.material.button.MaterialButton;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -92,14 +93,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             solutionTv.setText(resultTv.getText());
             //String operation = dataToCalculate;
             String result = resultTv.getText().toString();
-            historyList.add(operation + " = " + result);
-            String equation = operation + " = " + result;
-            databaseHelper.insertEquation(equation);
+            String finalResult = getResult(dataToCalculate);
+            if (finalResult.startsWith("Inf") || finalResult.startsWith("syntax")) {
+                resultTv.setText("syntax error");
+                // Toast.makeText(getApplicationContext(), "Impossible de diviser par 0", Toast.LENGTH_LONG).show();
 
+            } else if (finalResult.startsWith("syntax")) {
+                resultTv.setText("syntax error");
+                Toast.makeText(getApplicationContext(), "syntax error", Toast.LENGTH_LONG).show();
 
-            if (historyList.size() > 10) {
-                historyList.remove(0);
+            }else if (finalResult.startsWith("Err")) {
+                resultTv.setText("syntax error");
+                Toast.makeText(getApplicationContext(), "syntax error", Toast.LENGTH_LONG).show();
+
+            } else {
+                // historyList.add(operation + " = " + result);
+                String equation = operation + " = " + result;
+                databaseHelper.insertEquation(equation);
             }
+
+           /* if (historyList.size() > 10) {
+                historyList.remove(0);
+            }*/
             return;
         }
         if (buttonText.equals("C")) {
@@ -142,6 +157,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String finalResult = context.evaluateString(scriptable, data, "Javascript", 1, null).toString();
             if (finalResult.endsWith(".0")) {
                 finalResult = finalResult.replace(".0", "");
+            } else if (finalResult.startsWith("Inf")) {
+                //resultTv.setText("Non divisible par 0");
+                Toast.makeText(getApplicationContext(), "Impossible de diviser par 0", Toast.LENGTH_LONG).show();
+                return "syntax error";
+            }else if (finalResult.startsWith("NaN")) {
+                //resultTv.setText("Non divisible par 0");
+                Toast.makeText(getApplicationContext(), "Impossible de diviser par 0", Toast.LENGTH_LONG).show();
+                return "syntax error";
             }
             return finalResult;
         } catch (Exception e) {
